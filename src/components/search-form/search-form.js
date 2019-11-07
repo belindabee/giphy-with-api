@@ -2,14 +2,19 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export default function SearchForm ({ onSearchSubmitted }) {
+    let searchField= null
+    const searchSubmitted = (e) => {
+        e.preventDefault()
+        onSearchSubmitted(searchField.value)
+    }
     return (
-        <form>
-            <input type='text' placeholder='find me Giphy...' />
+        <form onSubmit={searchSubmitted}>
+            <input ref={(e) => searchField = e}  type='text' placeholder='find me Giphy...' />
             <input type='submit' value='search' />
         </form>
     )
 }
 
-SearchForm.proptypes = {
+SearchForm.propTypes = {
     onSearchSubmitted: PropTypes.func.isRequired,
 }
